@@ -7,8 +7,7 @@ const resolvers = {
     Query: {
         me: async (parent, args, context) => {
             if(context.user) {
-                const userData = await User.findOne({ _id: context.user._id})
-                .select('-__v-password');
+                const userData = await User.findOne({ _id: context.user._id }).select('-__v -password');
 
                 return userData;
             }
@@ -30,17 +29,14 @@ const resolvers = {
 
             const token = signToken(user);
 
-            return { token, user};
+            return { token, user };
         },
-        addUser: async (parent , args) => {
-            try {
+        addUser: async (parent, args) => {
+
                 const user = await User.create(args);
                 
                 const token = signToken(user);
                 return { token, user };
-            } catch (err) {
-                console.log(err);
-            }
 
         }, 
         saveBook: async (parent, { input }, context) => {
