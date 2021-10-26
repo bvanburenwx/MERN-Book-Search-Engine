@@ -18,13 +18,13 @@ const typeDefs = gql`
         savedBooks: [Book]
     }
 
-    type Query {
-        me: User
-    }
-
     type Auth {
         token: ID!
         user: User
+    }
+
+    type Query {
+        me: User
     }
 
     input savedBook {
@@ -40,7 +40,7 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         saveBook(input: savedBook!): User
-        removeBook(bookId: ID!); User
+        removeBook(bookId: ID!): User
     }
 `;
 
